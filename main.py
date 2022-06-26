@@ -12,6 +12,7 @@ setting_open = False
 item_selected = None
 inventory_open = False
 level = 1
+direction = None
 
 # Launcher and Window Creation
 launcher_layout = [[sg.Text("!Run Game?( INDEV V0.1)!")], [sg.Button("Close"), sg.Button('Run Indev')]]
@@ -29,8 +30,15 @@ if event!='Close':
   wn.tracer(0)
   wn.addshape("settings_icon.gif")
   wn.addshape("player_icon.gif")
-  wn.addshape("sheep.gif")
-  
+  wn.addshape("Assets/sheep.gif")
+  wn.addshape("Assets/pond.gif")
+  wn.addshape("Assets/fish.gif")
+
+  entity3 = turtle.Turtle()
+  entity3.shape("Assets/pond.gif")
+  entity3.penup()
+  entity3.goto(180, -200)
+
   player = turtle.Turtle()
   player.shape("player_icon.gif")
   player.penup()
@@ -110,8 +118,8 @@ if event!='Close':
   while running:
     wn.update()
     if level == 1:
-      entity.shape("sheep.gif")
-      entity2.shape("sheep.gif")
+      entity.shape("Assets/sheep.gif")
+      entity2.shape("Assets/sheep.gif")
       entity2.showturtle()
       entity.showturtle()
       if (slowdown%20)==0:
@@ -120,3 +128,27 @@ if event!='Close':
       slowdown += 1
       entity.forward(1)
       entity2.forward(1)
+      if entity3.distance(player) < 20:
+        entity.hideturtle()
+        entity2.hideturtle()
+        entity3.hideturtle()
+        entity.goto(-280, 150)
+        entity2.goto(-280, -150)
+        entity.setheading(0)
+        entity2.setheading(0)
+        player.goto(0, 0)
+        level = 2
+        direction = 1
+  
+    if level == 2:
+      wn.bgcolor("#3498DB")
+      entity.shape("Assets/fish.gif")
+      entity2.shape("Assets/fish.gif")
+      entity.showturtle()
+      entity2.showturtle()
+      entity.forward(direction)
+      entity2.forward(direction)
+      if (entity.xcor()>280) or (entity.xcor()<-280):
+        direction = -1 * direction
+        entity.tilt(180)
+        entity2.tilt(180)
