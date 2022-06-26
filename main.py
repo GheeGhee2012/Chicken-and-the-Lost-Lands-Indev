@@ -132,13 +132,12 @@ if event!='Close':
         entity.hideturtle()
         entity2.hideturtle()
         entity3.hideturtle()
-        entity.goto(-280, 150)
-        entity2.goto(-280, -150)
+        entity.goto(0, 150)
+        entity2.goto(0, -150)
         entity.setheading(0)
         entity2.setheading(0)
         player.goto(0, 0)
         level = 2
-        direction = 1
   
     if level == 2:
       wn.bgcolor("#3498DB")
@@ -146,9 +145,13 @@ if event!='Close':
       entity2.shape("Assets/fish.gif")
       entity.showturtle()
       entity2.showturtle()
-      entity.forward(direction)
-      entity2.forward(direction)
-      if (entity.xcor()>280) or (entity.xcor()<-280):
-        direction = -1 * direction
-        entity.tilt(180)
-        entity2.tilt(180)
+      if (slowdown%20)==0:
+        entity.setheading(random.randint(-45, 45))
+        entity2.setheading(random.randint(-45, 45))
+      slowdown += 1
+      entity.forward(1)
+      entity2.forward(1)
+      if (entity.xcor()>280):
+        entity.goto(-280, 150)
+      if (entity2.xcor()>280):
+        entity2.goto(-280, -150)
