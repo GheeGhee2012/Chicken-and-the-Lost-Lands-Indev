@@ -4,3 +4,5 @@ To set up the game run the following instructions
 
 2: run launch.sh to install requirements
 other than python (download at python.org)
+
+3: Launch cattl.pyw!

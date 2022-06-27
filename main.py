@@ -1,4 +1,4 @@
-# Welcome To Chicken and the lost lands
+ # Welcome To Chicken and the lost lands
 # These are the requirements
 # You will need python 3 and PySimpleGUI in cmd/terminal write "pip install PySimpleGUI"
 
@@ -15,7 +15,7 @@ level = 1
 direction = None
 
 # Launcher and Window Creation
-launcher_layout = [[sg.Text("!Run Game?( INDEV V0.1)!")], [sg.Button("Close"), sg.Button('Run Indev')]]
+launcher_layout = [[sg.Text("!Run Game?( INDEV V0.2)!")], [sg.Button("Close"), sg.Button('Run Indev')]]
 
 wn = sg.Window("    CATLL Launcher",launcher_layout, size = (300, 200))
 event, value = wn.read()
@@ -28,11 +28,13 @@ if event!='Close':
   wn.bgcolor("green")
   wn.title("Chicken and the Lost Lands")
   wn.tracer(0)
+  
   wn.addshape("settings_icon.gif")
   wn.addshape("player_icon.gif")
   wn.addshape("Assets/sheep.gif")
   wn.addshape("Assets/pond.gif")
   wn.addshape("Assets/fish.gif")
+  wn.addshape("Assets/farm.gif")
 
   entity3 = turtle.Turtle()
   entity3.shape("Assets/pond.gif")
@@ -95,7 +97,7 @@ if event!='Close':
 
   def open_setting_menu(x,y):
     settings_layout = [
-      [sg.Text("Paused. Press Play To Resume")],[sg.Button("Play")]
+      [sg.Text("Paused. Press Resume To Resume")],[sg.Button("Resume")]
     ]
     wn = sg.Window("    Paused",settings_layout, size = (300, 200))
     event, value = wn.read()
@@ -128,7 +130,7 @@ if event!='Close':
       slowdown += 1
       entity.forward(1)
       entity2.forward(1)
-      if entity3.distance(player) < 20:
+      if entity3.distance(player) < 60:
         entity.hideturtle()
         entity2.hideturtle()
         entity3.hideturtle()
@@ -155,3 +157,13 @@ if event!='Close':
         entity.goto(-280, 150)
       if (entity2.xcor()>280):
         entity2.goto(-280, -150)
+      if entity2.distance(player) < 20:
+        level = 3
+    
+    if level == 3:
+      wn.bgcolor("#AFEF53")
+      entity2.hideturtle()
+      entity.hideturtle()
+      entity3.showturtle()
+      entity3.shape("Assets/farm.gif")
+      entity3.goto(-250, -50)       
