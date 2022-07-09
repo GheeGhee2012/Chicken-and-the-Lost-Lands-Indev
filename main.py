@@ -31,13 +31,13 @@ if event!='Close':
   
   wn.addshape("settings_icon.gif")
   wn.addshape("player_icon.gif")
-  wn.addshape("Assets/sheep.gif")
-  wn.addshape("Assets/pond.gif")
-  wn.addshape("Assets/fish.gif")
-  wn.addshape("Assets/farm.gif")
+  wn.addshape("Assets/Images/sheep.gif")
+  wn.addshape("Assets/Images/pond.gif")
+  wn.addshape("Assets/Images/fish.gif")
+  wn.addshape("Assets/Images/farm.gif")
 
   entity3 = turtle.Turtle()
-  entity3.shape("Assets/pond.gif")
+  entity3.shape("Assets/Images/pond.gif")
   entity3.penup()
   entity3.goto(180, -200)
 
@@ -88,6 +88,9 @@ if event!='Close':
     if not setting_open:
       player.setheading(0)
       player.forward(5)
+
+  def QUIT_GAME():
+    pass
   
   class Turtle_Editor(turtle.Turtle):
     def delete_on_click(self, x, y):
@@ -97,8 +100,8 @@ if event!='Close':
 
   def open_setting_menu(x,y):
     settings_layout = [
-      [sg.Text("Paused. Press Resume To Resume")],[sg.Button("Resume")]
-    ]
+      [sg.Text("Paused. Press Resume To Resume")],[sg.Button("Resume")], [sg.Button("Quit Game(Button Still In development!)")]]
+    
     wn = sg.Window("    Paused",settings_layout, size = (300, 200))
     event, value = wn.read()
     wn.close()
@@ -120,8 +123,8 @@ if event!='Close':
   while running:
     wn.update()
     if level == 1:
-      entity.shape("Assets/sheep.gif")
-      entity2.shape("Assets/sheep.gif")
+      entity.shape("Assets/Images/sheep.gif")
+      entity2.shape("Assets/Images/sheep.gif")
       entity2.showturtle()
       entity.showturtle()
       if (slowdown%20)==0:
@@ -143,8 +146,8 @@ if event!='Close':
   
     if level == 2:
       wn.bgcolor("#3498DB")
-      entity.shape("Assets/fish.gif")
-      entity2.shape("Assets/fish.gif")
+      entity.shape("Assets/Images/fish.gif")
+      entity2.shape("Assets/Images/fish.gif")
       entity.showturtle()
       entity2.showturtle()
       if (slowdown%20)==0:
@@ -165,5 +168,11 @@ if event!='Close':
       entity2.hideturtle()
       entity.hideturtle()
       entity3.showturtle()
-      entity3.shape("Assets/farm.gif")
-      entity3.goto(-250, -50)       
+      entity3.shape("Assets/Images/farm.gif")
+      entity3.goto(-250, -50)   
+      if entity3.distance(player) < 55:
+        level = 4
+
+    if level == 4:
+      wn.bgcolor("#27AE60")
+      entity3.hideturtle()    
